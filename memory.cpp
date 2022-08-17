@@ -6,7 +6,7 @@ Memory::Memory(std::wstring process_name, std::wstring module_name)
 {
 	if (module_name_ == L"") module_name_ = process_name_;
 	get_process_id();
-	handle_ = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id_);
+	handle_ = OpenProcess(PROCESS_VM_READ | PROCESS_VM_WRITE | PROCESS_VM_OPERATION, FALSE, process_id_);
 	get_window_handle();
     wchar_t text[MAX_PATH];
     GetWindowText(window_handle_, text, MAX_PATH);
