@@ -68,3 +68,33 @@ private:
 };
 
 inline std::unique_ptr<Memory> g_memory;
+
+inline std::string WideChraracterToMultiByte(std::wstring WideChraracter)
+{
+    DWORD dBufSize = WideCharToMultiByte(CP_OEMCP, 0, WideChraracter.c_str(), -1, NULL,0,NULL, FALSE);
+    char* dBuf = new char[dBufSize];
+    memset(dBuf, 0, dBufSize);
+    int nRet = WideCharToMultiByte(CP_OEMCP, 0, WideChraracter.c_str(), -1, dBuf, dBufSize, NULL, FALSE);
+    std::string str = "";
+    if(nRet > 0)
+    {
+        str = dBuf;
+    }
+    delete[] dBuf;
+    return str;
+}
+
+inline std::wstring MultiByteToWideChraracter(std::string MultiByte)
+{
+    DWORD dBufSize = MultiByteToWideChar(CP_ACP, 0, MultiByte.c_str(), -1, NULL, 0);
+    wchar_t* dBuf = new wchar_t[dBufSize];
+    wmemset(dBuf, 0, dBufSize);
+    int nRet = MultiByteToWideChar(CP_ACP, 0, MultiByte.c_str(), -1, dBuf, dBufSize);
+    std::wstring str = L"";
+    if(nRet > 0)
+    {
+        str = dBuf;
+    }
+    delete[] dBuf;
+    return str;
+}
