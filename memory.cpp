@@ -89,6 +89,7 @@ void Memory::get_window_handle()
                 (*(std::pair<DWORD, HWND>*)lParam).second = hwnd;
             return TRUE;
         }, (LPARAM)&params);
+    window_handle_ = params.second;
 }
 
 void Memory::get_module_info()
